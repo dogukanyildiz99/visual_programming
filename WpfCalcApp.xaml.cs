@@ -1,3 +1,6 @@
+/*
+ * BUTON AKSİYONLARININ TANIMLANMASI 
+ */
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +29,9 @@ namespace WpfCalcApp
         }
 
         //Gerekli değişkenler
-        long num1 = 0;
-        long num2 = 0;
+        float num1 = 0;
+        float num2 = 0;
+        bool oprtrState = false;
         string oprtr = "";
 
         //Rakamlar
@@ -172,5 +176,112 @@ namespace WpfCalcApp
             }
         }
 
+        //Matematiksel Operatörler
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            oprtrState = true;
+            oprtr = "+";
+            txtDisplay.Text = "+";
+        }
+
+        private void btnSub_Click(object sender, RoutedEventArgs e)
+        {
+            oprtrState = true;
+            oprtr = "-";
+            txtDisplay.Text = "-";
+        }
+
+        private void btnMul_Click(object sender, RoutedEventArgs e)
+        {
+            oprtrState = true;
+            oprtr = "x";
+            txtDisplay.Text = "x";
+        }
+
+        private void btnDiv_Click(object sender, RoutedEventArgs e)
+        {
+            oprtrState = true;
+            oprtr = "÷";
+            txtDisplay.Text = "÷";
+        }
+
+        //İşlem Sonucu
+        private void btnRes_Click(object sender, RoutedEventArgs e)
+        {
+            switch (oprtr)
+            {
+                case "+":
+                    txtDisplay.Text = (num1 + num2).ToString();
+                    break;
+                case "-":
+                    txtDisplay.Text = (num1 - num2).ToString();
+                    break;
+                case "x":
+                    txtDisplay.Text = (num1 * num2).ToString();
+                    break;
+                case "÷":
+                    txtDisplay.Text = (num1 / num2).ToString();
+                    break;
+            }
+            oprtrState = false;
+        }
+
+        //Ondalık
+        private void btnDec_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtDisplay.Text == "0")
+            {
+                txtDisplay.Text = "0";
+            }
+            else if (oprtrState)
+            {
+                txtDisplay.Text = "0";
+            }
+
+            if (!txtDisplay.Text.Contains(","))
+            {
+                txtDisplay.Text += ".";
+            }
+            oprtrState = false;
+        }
+
+        //İşaret Değiştirme
+        private void btnPtN_Click(object sender, RoutedEventArgs e)
+        {
+            if (oprtr == "")
+            {
+                num1 *= -1;
+                txtDisplay.Text = num1.ToString();
+            }
+            else
+            {
+                num2 *= -1;
+                txtDisplay.Text = num2.ToString();
+            }
+        }
+
+        //Silme İşlemi
+        private void btnDel_Click(object sender, RoutedEventArgs e)
+        {
+            if (oprtr == "")
+            {
+                num1 = (num1 / 10);
+                txtDisplay.Text = num1.ToString();
+            }
+            else
+            {
+                num2 = (num2 / 10);
+                txtDisplay.Text = num2.ToString();
+            }
+        }
+
+        //Temizleme
+        private void btnClr_Click(object sender, RoutedEventArgs e)
+        {
+            num1 = 0;
+            num2 = 0;
+            txtDisplay.Text = "0";
+            oprtr = "";
+        }
     }
 }
