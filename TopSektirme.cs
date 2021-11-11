@@ -20,7 +20,6 @@ namespace TopSektirme
         public Form1()
         {
             InitializeComponent();
-            KeyPreview = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,7 +30,7 @@ namespace TopSektirme
         //Şekil oluşturmada kullanılacak fonksiyon
         private void MakePictureBox()
         {
-            
+
             if (picBoxCount < 5)
             {
                 Random rnd = new Random();
@@ -103,44 +102,57 @@ namespace TopSektirme
         //Her 10 saniyede bir fonksiyon çağırılacak ve şekil oluşturulacak
         private void TimerEvent(object sender, EventArgs e)
         {
-           MakePictureBox();
+            MakePictureBox();
         }
 
+        //Çubuğun sağa sola hareketi
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             int x = pictureBox1.Location.X;
             int y = pictureBox1.Location.Y;
 
-            if(x > 31 && x < 758)
+            if (x > 30 && x < 505)
             {
                 if (e.KeyCode == Keys.D)
                 {
-                    x += 5;
+                    x += 10;
                 }
                 else if (e.KeyCode == Keys.A)
                 {
-                    x -= 5;
+                    x -= 10;
                 }
                 else if (e.KeyCode == Keys.Right)
                 {
-                    x += 5;
+                    x += 10;
                 }
                 else if (e.KeyCode == Keys.Left)
                 {
-                    x -= 5;
+                    x -= 10;
                 }
 
 
             }
-            else if (x == 35)
+            //Duvarlardan geçmemesi için
+            else if (x == 30)
+            {
+                if (e.KeyCode == Keys.D)
+                {
+                    x += 10;
+                }
+                else if (e.KeyCode == Keys.Right)
+                {
+                    x += 10;
+                }
+            }
+            else if(x > 500)
             {
                 if (e.KeyCode == Keys.A)
-                    {
-                        x -= 5;
-                    }
+                {
+                    x -= 10;
+                }
                 else if (e.KeyCode == Keys.Left)
                 {
-                    x -= 5;
+                    x -= 10;
                 }
             }
 
