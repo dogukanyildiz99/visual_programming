@@ -76,7 +76,7 @@ namespace TopSektirmeSkorlu
             }
             picBoxCount++;
 
-            //Gamescore değişimine göre textin değişmesi !Tamamlanmadı!
+            //Gamescore değişimine göre textin değişmesi !TAMAMLANMADI!
             if (gamescore == 1)
             {
                 skor.Text = (1 + Double.Parse(skor.Text)).ToString();
@@ -105,6 +105,7 @@ namespace TopSektirmeSkorlu
             Movement.Stop();
         }
 
+        //Verilen interval değere göre ekrana daire çizilmesi
         private void TimerEvent(object sender, EventArgs e)
         {
             if(picBoxCount < 11)
@@ -223,6 +224,7 @@ namespace TopSektirmeSkorlu
             cubuk.Location = new Point(x, y);
         }
 
+        //Hareketi sağlamak için !TAMAMLANMADI!
         private void Movement_Tick(object sender, EventArgs e)
         {
             
