@@ -37,7 +37,6 @@ namespace TopSektirmeSkorlu
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.play = new System.Windows.Forms.Button();
             this.pause = new System.Windows.Forms.Button();
-            this.skor = new System.Windows.Forms.Label();
             this.Spawn = new System.Windows.Forms.Timer(this.components);
             this.cubuk = new System.Windows.Forms.PictureBox();
             this.Movement = new System.Windows.Forms.Timer(this.components);
@@ -46,6 +45,9 @@ namespace TopSektirmeSkorlu
             this.reset = new System.Windows.Forms.Button();
             this.CıkanTopUst = new System.Windows.Forms.PictureBox();
             this.CıkanTopAlt = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.skor = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sol)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sag)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sagUst)).BeginInit();
@@ -121,18 +123,6 @@ namespace TopSektirmeSkorlu
             this.pause.UseVisualStyleBackColor = true;
             this.pause.Click += new System.EventHandler(this.pause_Click);
             // 
-            // skor
-            // 
-            this.skor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.skor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.skor.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.skor.Location = new System.Drawing.Point(683, 33);
-            this.skor.Name = "skor";
-            this.skor.Size = new System.Drawing.Size(69, 42);
-            this.skor.TabIndex = 7;
-            this.skor.Text = "0";
-            this.skor.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // Spawn
             // 
             this.Spawn.Enabled = true;
@@ -200,19 +190,56 @@ namespace TopSektirmeSkorlu
             this.CıkanTopAlt.TabIndex = 13;
             this.CıkanTopAlt.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(574, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(178, 42);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Score:";
+            // 
+            // skor
+            // 
+            this.skor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.skor.BackColor = System.Drawing.Color.Transparent;
+            this.skor.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.skor.Location = new System.Drawing.Point(667, 34);
+            this.skor.Name = "skor";
+            this.skor.Size = new System.Drawing.Size(74, 38);
+            this.skor.TabIndex = 14;
+            this.skor.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(227, 563);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(288, 36);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "A ve D tuşları ile çubuğu hareket ettirebilirsiniz.";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(788, 601);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.skor);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.CıkanTopAlt);
             this.Controls.Add(this.CıkanTopUst);
             this.Controls.Add(this.reset);
             this.Controls.Add(this.restore);
             this.Controls.Add(this.backup);
             this.Controls.Add(this.cubuk);
-            this.Controls.Add(this.skor);
             this.Controls.Add(this.pause);
             this.Controls.Add(this.play);
             this.Controls.Add(this.pictureBox5);
@@ -248,7 +275,6 @@ namespace TopSektirmeSkorlu
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Button play;
         private System.Windows.Forms.Button pause;
-        private System.Windows.Forms.Label skor;
         private System.Windows.Forms.Timer Spawn;
         private System.Windows.Forms.PictureBox cubuk;
         private System.Windows.Forms.Timer Movement;
@@ -257,6 +283,9 @@ namespace TopSektirmeSkorlu
         private System.Windows.Forms.Button reset;
         private System.Windows.Forms.PictureBox CıkanTopUst;
         private System.Windows.Forms.PictureBox CıkanTopAlt;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label skor;
+        private System.Windows.Forms.Label label2;
     }
 }
 

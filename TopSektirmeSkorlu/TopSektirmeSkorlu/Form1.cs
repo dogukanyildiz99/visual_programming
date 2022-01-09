@@ -17,6 +17,7 @@ namespace TopSektirmeSkorlu
         Random rand = new Random();
         //PictureBoxları tutacağımız listemiz
         List<PictureBox> PicBoxList = new List<PictureBox>();
+        //Top sayısı
         int picBoxCount = 0;
 
         public Form1()
@@ -29,23 +30,12 @@ namespace TopSektirmeSkorlu
         public void PictureDraw()
         {
             Random rnd = new Random();
-            int num = rnd.Next(0, 2000);
+            int num = rnd.Next(0, 500);
 
             //Kare şeklinde PictureBox çizdirme
             PictureBox newPic = new PictureBox();
             newPic.Height = 40;
             newPic.Width = 40;
-
-            //PictureBoxtan Daire çizdirme
-            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
-            gp.AddEllipse(0, 0, newPic.Width - 3, newPic.Height - 3);
-            Region rg = new Region(gp);
-            newPic.Region = rg;
-
-            //Dairenin çizdireleceği aralıklar
-            int x = rand.Next(100, 600);
-            int y = rand.Next(50, 300);
-            newPic.Location = new Point(x, y);
 
             //Renkleri rastgele belirlemek için
             if (num % 2 == 0)
@@ -68,12 +58,25 @@ namespace TopSektirmeSkorlu
             {
                 newPic.BackColor = Color.White;
             }
+            //PictureBoxtan Daire çizdirme
+            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
+            gp.AddEllipse(0, 0, newPic.Width - 3, newPic.Height - 3);
+            Region rg = new Region(gp);
+            newPic.Region = rg;
 
+            //Dairenin çizdireleceği aralıklar
+            int x = rand.Next(100, 600);
+            int y = rand.Next(50, 300);
+            newPic.Location = new Point(x, y);
+            //Topu PicBoxList listesine ekler
             PicBoxList.Add(newPic);
+            //class TopSektirmeSkorlu.Form1 e topu ekler
             this.Controls.Add(newPic);
+            //top sayısı artırılır
             picBoxCount++;
         }
 
+        //Form yüklendiği an ekrana top basılır
         private void Form1_Load(object sender, EventArgs e)
         {
             PictureDraw();
@@ -91,6 +94,14 @@ namespace TopSektirmeSkorlu
         {
             Spawn.Stop();
             Movement.Stop();
+        }
+
+        //Oyunu sıfırla
+        private void reset_Click(object sender, EventArgs e)
+        {
+            Form1 NewForm = new Form1();
+            NewForm.Show();
+            this.Dispose(false);
         }
 
         //Oyun Skorunun güncellenmesi
@@ -112,8 +123,8 @@ namespace TopSektirmeSkorlu
                 {
                     skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
-
-                Thread.Sleep(100);
+                //1 saniyeliğine işlemi askıya sonra devam et
+                Thread.Sleep(1000);
             }
         }
 
@@ -121,7 +132,7 @@ namespace TopSektirmeSkorlu
         private void TimerEvent(object sender, EventArgs e)
         {
 
-            if (picBoxCount < 6 && picBoxCount > 0)
+            if (picBoxCount < 6)
             {
                 PictureDraw();
             }
@@ -193,14 +204,6 @@ namespace TopSektirmeSkorlu
             }
 
             cubuk.Location = new Point(x, y);
-        }
-
-        //Oyunu sıfırlama
-        private void reset_Click(object sender, EventArgs e)
-        {
-            Form1 NewForm = new Form1();
-            NewForm.Show();
-            this.Dispose(false);
         }
 
         //Backup tuşu TAMAMLANMADI
@@ -630,4 +633,5 @@ namespace TopSektirmeSkorlu
         }
 
     }
+
 }
