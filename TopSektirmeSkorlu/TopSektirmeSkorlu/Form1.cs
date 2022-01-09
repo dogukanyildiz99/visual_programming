@@ -13,7 +13,7 @@ namespace TopSektirmeSkorlu
 {
     public partial class Form1 : Form
     {
-       
+
         Random rand = new Random();
         //PictureBoxları tutacağımız listemiz
         List<PictureBox> PicBoxList = new List<PictureBox>();
@@ -26,7 +26,7 @@ namespace TopSektirmeSkorlu
         }
 
         //Daireleri çizecek metod
-        public void PictureDraw() 
+        public void PictureDraw()
         {
             Random rnd = new Random();
             int num = rnd.Next(0, 2000);
@@ -64,10 +64,11 @@ namespace TopSektirmeSkorlu
             {
                 newPic.BackColor = Color.Green;
             }
-            else if (num % 11 == 0)
+            else
             {
                 newPic.BackColor = Color.White;
             }
+
             PicBoxList.Add(newPic);
             this.Controls.Add(newPic);
             picBoxCount++;
@@ -96,7 +97,7 @@ namespace TopSektirmeSkorlu
         int gamescore = 0;
         private void threadSkor()
         {
-            while(gamescore > 0)
+            while (gamescore > 0)
             {
                 //Gamescore değişimine göre textin değişmesi
                 if (gamescore == 1)
@@ -113,14 +114,14 @@ namespace TopSektirmeSkorlu
                 }
 
                 Thread.Sleep(100);
-            }  
+            }
         }
 
         //Verilen interval değere göre ekrana topların çizilmesi
         private void TimerEvent(object sender, EventArgs e)
         {
 
-            if (picBoxCount < 6 && picBoxCount >0)
+            if (picBoxCount < 6 && picBoxCount > 0)
             {
                 PictureDraw();
             }
@@ -243,7 +244,7 @@ namespace TopSektirmeSkorlu
             if (picBoxCount > 0)
             {
                 PictureBox firstPic = PicBoxList.ElementAt(0);
-                
+
                 firstPic.Top = firstPic.Top + hizy1;
                 firstPic.Left = firstPic.Left - hizx1;
                 //Yanlardan sekmesi
@@ -285,30 +286,30 @@ namespace TopSektirmeSkorlu
                 PictureBox secondPic = PicBoxList.ElementAt(1);
                 secondPic.Top = secondPic.Top - hizy2;
                 secondPic.Left = secondPic.Left - hizx2;
-                
+
                 if (secondPic.Bounds.IntersectsWith(sag.Bounds) || secondPic.Bounds.IntersectsWith(sol.Bounds))
                 {
                     hizx2 *= -1;
                 }
-                
+
                 if (secondPic.Bounds.IntersectsWith(sagUst.Bounds) || secondPic.Bounds.IntersectsWith(solUst.Bounds))
                 {
                     hizy2 *= -1;
                 }
-                
+
                 if (secondPic.Bounds.IntersectsWith(cubuk.Bounds))
                 {
                     hizy2 *= -1;
                     skor.Text = (1 + Double.Parse(skor.Text)).ToString();
                 }
-                
+
                 if (secondPic.Bounds.IntersectsWith(CıkanTopUst.Bounds))
                 {
                     hizy2 *= -1;
                     secondPic.Dispose();
                     skor.Text = (10 + Double.Parse(skor.Text)).ToString();
                 }
-                
+
                 if (secondPic.Bounds.IntersectsWith(CıkanTopAlt.Bounds))
                 {
                     hizy2 *= -1;
@@ -318,7 +319,7 @@ namespace TopSektirmeSkorlu
                     skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
-            
+
             if (picBoxCount > 2)
             {
                 PictureBox thirdPic = PicBoxList.ElementAt(2);
@@ -357,7 +358,7 @@ namespace TopSektirmeSkorlu
                     skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
-            
+
             if (picBoxCount > 3)
             {
                 PictureBox fourthPic = PicBoxList.ElementAt(3);
@@ -396,9 +397,9 @@ namespace TopSektirmeSkorlu
                     skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
-            
+
             if (picBoxCount > 4)
-                {
+            {
                 PictureBox fifthPic = PicBoxList.ElementAt(4);
                 fifthPic.Top = fifthPic.Top + hizy5;
                 fifthPic.Left = fifthPic.Left + hizx5;
@@ -435,7 +436,7 @@ namespace TopSektirmeSkorlu
                     skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
-            
+
             if (picBoxCount > 5)
             {
                 PictureBox sixthPic = PicBoxList.ElementAt(5);
@@ -473,7 +474,7 @@ namespace TopSektirmeSkorlu
                     skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
-            
+
             if (picBoxCount > 6)
             {
                 PictureBox seventhPic = PicBoxList.ElementAt(6);
@@ -511,7 +512,7 @@ namespace TopSektirmeSkorlu
                     skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
-            
+
             if (picBoxCount > 7)
             {
                 PictureBox eigthPic = PicBoxList.ElementAt(7);
@@ -549,7 +550,7 @@ namespace TopSektirmeSkorlu
                     skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
-            
+
             if (picBoxCount > 8)
             {
                 PictureBox ninthPic = PicBoxList.ElementAt(8);
@@ -587,7 +588,7 @@ namespace TopSektirmeSkorlu
                     skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
-            
+
             if (picBoxCount > 9)
             {
                 PictureBox tenthPic = PicBoxList.ElementAt(9);

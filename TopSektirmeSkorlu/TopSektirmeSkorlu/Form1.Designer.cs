@@ -151,7 +151,7 @@ namespace TopSektirmeSkorlu
             // Movement
             // 
             this.Movement.Enabled = true;
-            this.Movement.Interval = 10;
+            this.Movement.Interval = 1;
             this.Movement.Tick += new System.EventHandler(this.Movement_Tick);
             // 
             // backup
@@ -188,15 +188,15 @@ namespace TopSektirmeSkorlu
             // 
             this.CıkanTopUst.Location = new System.Drawing.Point(280, 0);
             this.CıkanTopUst.Name = "CıkanTopUst";
-            this.CıkanTopUst.Size = new System.Drawing.Size(228, 5);
+            this.CıkanTopUst.Size = new System.Drawing.Size(228, 1);
             this.CıkanTopUst.TabIndex = 12;
             this.CıkanTopUst.TabStop = false;
             // 
             // CıkanTopAlt
             // 
-            this.CıkanTopAlt.Location = new System.Drawing.Point(30, 556);
+            this.CıkanTopAlt.Location = new System.Drawing.Point(30, 560);
             this.CıkanTopAlt.Name = "CıkanTopAlt";
-            this.CıkanTopAlt.Size = new System.Drawing.Size(728, 5);
+            this.CıkanTopAlt.Size = new System.Drawing.Size(728, 1);
             this.CıkanTopAlt.TabIndex = 13;
             this.CıkanTopAlt.TabStop = false;
             // 
