@@ -123,14 +123,15 @@ namespace TopSektirmeSkorlu
             // 
             // skor
             // 
-            this.skor.AutoSize = true;
+            this.skor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.skor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.skor.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.skor.Location = new System.Drawing.Point(705, 33);
+            this.skor.Location = new System.Drawing.Point(683, 33);
             this.skor.Name = "skor";
-            this.skor.Size = new System.Drawing.Size(36, 42);
+            this.skor.Size = new System.Drawing.Size(69, 42);
             this.skor.TabIndex = 7;
             this.skor.Text = "0";
+            this.skor.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // Spawn
             // 
@@ -235,7 +236,6 @@ namespace TopSektirmeSkorlu
             ((System.ComponentModel.ISupportInitialize)(this.CıkanTopUst)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CıkanTopAlt)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

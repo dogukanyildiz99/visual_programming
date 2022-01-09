@@ -43,31 +43,33 @@ namespace TopSektirmeSkorlu
             newPic.Region = rg;
 
             //Dairenin çizdireleceği aralıklar
-            int x = rand.Next(100, 700);
-            int y = rand.Next(100, 300);
+            int x = rand.Next(100, 600);
+            int y = rand.Next(50, 300);
             newPic.Location = new Point(x, y);
 
-            PicBoxList.Add(newPic);
-            this.Controls.Add(newPic);
-
             //Renkleri rastgele belirlemek için
-            if (num % 3 == 0)
+            if (num % 2 == 0)
             {
                 newPic.BackColor = Color.Red;
             }
-            else if (num % 5 == 0)
+            else if (num % 3 == 0)
             {
                 newPic.BackColor = Color.Yellow;
             }
-            else if (num % 7 == 0)
+            else if (num % 5 == 0)
             {
                 newPic.BackColor = Color.Blue;
             }
-            else if (num % 11 == 0)
+            else if (num % 7 == 0)
             {
                 newPic.BackColor = Color.Green;
             }
-
+            else if (num % 11 == 0)
+            {
+                newPic.BackColor = Color.White;
+            }
+            PicBoxList.Add(newPic);
+            this.Controls.Add(newPic);
             picBoxCount++;
         }
 
@@ -235,7 +237,7 @@ namespace TopSektirmeSkorlu
         int hizx10 = 2;
         int hizy10 = 2;
 
-        //Hareketi sağlamak için !TAMAMLANMADI!
+        //Hareketi sağlamak için
         private void Movement_Tick(object sender, EventArgs e)
         {
             if (picBoxCount > 0)
@@ -244,25 +246,37 @@ namespace TopSektirmeSkorlu
                 
                 firstPic.Top = firstPic.Top + hizy1;
                 firstPic.Left = firstPic.Left - hizx1;
-
-                if(firstPic.Bounds.IntersectsWith(sag.Bounds) || firstPic.Bounds.IntersectsWith(sol.Bounds))
+                //Yanlardan sekmesi
+                if (firstPic.Bounds.IntersectsWith(sag.Bounds) || firstPic.Bounds.IntersectsWith(sol.Bounds))
                 {
                     hizx1 *= -1;
                 }
-
+                //Üstteki sınırlardan sekmesi
                 if (firstPic.Bounds.IntersectsWith(sagUst.Bounds) || firstPic.Bounds.IntersectsWith(solUst.Bounds))
                 {
                     hizy1 *= -1;
                 }
-
+                //Çubukla etkileşim sonucu sekmesi
                 if (firstPic.Bounds.IntersectsWith(cubuk.Bounds))
                 {
                     hizy1 *= -1;
+                    skor.Text = (1 + Double.Parse(skor.Text)).ToString();
                 }
-
+                //Yukarıdaki boşluktan çıkması
                 if (firstPic.Bounds.IntersectsWith(CıkanTopUst.Bounds))
                 {
-                    gamescore = 10;
+                    firstPic.Dispose();
+                    hizy1 *= -1;
+                    skor.Text = (10 + Double.Parse(skor.Text)).ToString();
+                }
+                //Alttaki boşluktan çıkması
+                if (firstPic.Bounds.IntersectsWith(CıkanTopAlt.Bounds))
+                {
+                    firstPic.Dispose();
+                    hizy1 *= -1;
+                    PictureDraw();
+                    PictureDraw();
+                    skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
 
@@ -271,21 +285,37 @@ namespace TopSektirmeSkorlu
                 PictureBox secondPic = PicBoxList.ElementAt(1);
                 secondPic.Top = secondPic.Top - hizy2;
                 secondPic.Left = secondPic.Left - hizx2;
-
+                
                 if (secondPic.Bounds.IntersectsWith(sag.Bounds) || secondPic.Bounds.IntersectsWith(sol.Bounds))
                 {
                     hizx2 *= -1;
                 }
-
+                
                 if (secondPic.Bounds.IntersectsWith(sagUst.Bounds) || secondPic.Bounds.IntersectsWith(solUst.Bounds))
                 {
                     hizy2 *= -1;
                 }
-
-                //Yukarıdaki boşluktan çıkması
+                
                 if (secondPic.Bounds.IntersectsWith(cubuk.Bounds))
                 {
-                    
+                    hizy2 *= -1;
+                    skor.Text = (1 + Double.Parse(skor.Text)).ToString();
+                }
+                
+                if (secondPic.Bounds.IntersectsWith(CıkanTopUst.Bounds))
+                {
+                    hizy2 *= -1;
+                    secondPic.Dispose();
+                    skor.Text = (10 + Double.Parse(skor.Text)).ToString();
+                }
+                
+                if (secondPic.Bounds.IntersectsWith(CıkanTopAlt.Bounds))
+                {
+                    hizy2 *= -1;
+                    secondPic.Dispose();
+                    PictureDraw();
+                    PictureDraw();
+                    skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
             
@@ -308,6 +338,23 @@ namespace TopSektirmeSkorlu
                 if (thirdPic.Bounds.IntersectsWith(cubuk.Bounds))
                 {
                     hizy3 *= -1;
+                    skor.Text = (1 + Double.Parse(skor.Text)).ToString();
+                }
+
+                if (thirdPic.Bounds.IntersectsWith(CıkanTopUst.Bounds))
+                {
+                    hizy3 *= -1;
+                    thirdPic.Dispose();
+                    skor.Text = (10 + Double.Parse(skor.Text)).ToString();
+                }
+
+                if (thirdPic.Bounds.IntersectsWith(CıkanTopAlt.Bounds))
+                {
+                    hizy3 *= -1;
+                    thirdPic.Dispose();
+                    PictureDraw();
+                    PictureDraw();
+                    skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
             
@@ -330,6 +377,23 @@ namespace TopSektirmeSkorlu
                 if (fourthPic.Bounds.IntersectsWith(cubuk.Bounds))
                 {
                     hizy4 *= -1;
+                    skor.Text = (1 + Double.Parse(skor.Text)).ToString();
+                }
+
+                if (fourthPic.Bounds.IntersectsWith(CıkanTopUst.Bounds))
+                {
+                    hizy4 *= -1;
+                    fourthPic.Dispose();
+                    skor.Text = (10 + Double.Parse(skor.Text)).ToString();
+                }
+
+                if (fourthPic.Bounds.IntersectsWith(CıkanTopAlt.Bounds))
+                {
+                    hizy4 *= -1;
+                    fourthPic.Dispose();
+                    PictureDraw();
+                    PictureDraw();
+                    skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
             
@@ -352,6 +416,23 @@ namespace TopSektirmeSkorlu
                 if (fifthPic.Bounds.IntersectsWith(cubuk.Bounds))
                 {
                     hizy5 *= -1;
+                    skor.Text = (1 + Double.Parse(skor.Text)).ToString();
+                }
+
+                if (fifthPic.Bounds.IntersectsWith(CıkanTopUst.Bounds))
+                {
+                    hizy5 *= -1;
+                    fifthPic.Dispose();
+                    skor.Text = (10 + Double.Parse(skor.Text)).ToString();
+                }
+
+                if (fifthPic.Bounds.IntersectsWith(CıkanTopAlt.Bounds))
+                {
+                    hizy5 *= -1;
+                    fifthPic.Dispose();
+                    PictureDraw();
+                    PictureDraw();
+                    skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
             
@@ -375,6 +456,22 @@ namespace TopSektirmeSkorlu
                 {
                     hizy6 *= -1;
                 }
+
+                if (sixthPic.Bounds.IntersectsWith(CıkanTopUst.Bounds))
+                {
+                    hizy6 *= -1;
+                    sixthPic.Dispose();
+                    skor.Text = (10 + Double.Parse(skor.Text)).ToString();
+                }
+
+                if (sixthPic.Bounds.IntersectsWith(CıkanTopAlt.Bounds))
+                {
+                    hizy6 *= -1;
+                    sixthPic.Dispose();
+                    PictureDraw();
+                    PictureDraw();
+                    skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
+                }
             }
             
             if (picBoxCount > 6)
@@ -396,6 +493,22 @@ namespace TopSektirmeSkorlu
                 if (seventhPic.Bounds.IntersectsWith(cubuk.Bounds))
                 {
                     hizy7 *= -1;
+                }
+
+                if (seventhPic.Bounds.IntersectsWith(CıkanTopUst.Bounds))
+                {
+                    hizy7 *= -1;
+                    seventhPic.Dispose();
+                    skor.Text = (10 + Double.Parse(skor.Text)).ToString();
+                }
+
+                if (seventhPic.Bounds.IntersectsWith(CıkanTopAlt.Bounds))
+                {
+                    hizy7 *= -1;
+                    seventhPic.Dispose();
+                    PictureDraw();
+                    PictureDraw();
+                    skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
             
@@ -419,6 +532,22 @@ namespace TopSektirmeSkorlu
                 {
                     hizy8 *= -1;
                 }
+
+                if (eigthPic.Bounds.IntersectsWith(CıkanTopUst.Bounds))
+                {
+                    hizy8 *= -1;
+                    eigthPic.Dispose();
+                    skor.Text = (10 + Double.Parse(skor.Text)).ToString();
+                }
+
+                if (eigthPic.Bounds.IntersectsWith(CıkanTopAlt.Bounds))
+                {
+                    hizy8 *= -1;
+                    eigthPic.Dispose();
+                    PictureDraw();
+                    PictureDraw();
+                    skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
+                }
             }
             
             if (picBoxCount > 8)
@@ -441,6 +570,22 @@ namespace TopSektirmeSkorlu
                 {
                     hizy9 *= -1;
                 }
+
+                if (ninthPic.Bounds.IntersectsWith(CıkanTopUst.Bounds))
+                {
+                    hizy9 *= -1;
+                    ninthPic.Dispose();
+                    skor.Text = (10 + Double.Parse(skor.Text)).ToString();
+                }
+
+                if (ninthPic.Bounds.IntersectsWith(CıkanTopAlt.Bounds))
+                {
+                    hizy9 *= -1;
+                    ninthPic.Dispose();
+                    PictureDraw();
+                    PictureDraw();
+                    skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
+                }
             }
             
             if (picBoxCount > 9)
@@ -462,6 +607,22 @@ namespace TopSektirmeSkorlu
                 if (tenthPic.Bounds.IntersectsWith(cubuk.Bounds))
                 {
                     hizy10 *= -1;
+                }
+
+                if (tenthPic.Bounds.IntersectsWith(CıkanTopUst.Bounds))
+                {
+                    hizy10 *= -1;
+                    tenthPic.Dispose();
+                    skor.Text = (10 + Double.Parse(skor.Text)).ToString();
+                }
+
+                if (tenthPic.Bounds.IntersectsWith(CıkanTopAlt.Bounds))
+                {
+                    hizy10 *= -1;
+                    tenthPic.Dispose();
+                    PictureDraw();
+                    PictureDraw();
+                    skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
                 }
             }
 
