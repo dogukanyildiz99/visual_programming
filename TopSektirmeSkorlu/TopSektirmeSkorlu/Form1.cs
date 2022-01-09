@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,35 +13,23 @@ namespace TopSektirmeSkorlu
 {
     public partial class Form1 : Form
     {
-        //Sınır değerler
-        int SagUstSinir = 30;
-        int SolUstSinir = 30;
-        int SagSinir = 758;
-        int SolSinir = 30;
-        int UstTopCikisAraligiSol = 280;
-        int UstTopCikisAraligiSag = 508;
-        int UstTopCikisAraligi = 0;
-
-        //topların hızları TAMAMLANMADI
-        int hizx = 5;
-        int hizy = 5;
-
-        int gamescore = 0;
+       
         Random rand = new Random();
         //PictureBoxları tutacağımız listemiz
-        List<PictureBox> items = new List<PictureBox>();
+        List<PictureBox> PicBoxList = new List<PictureBox>();
         int picBoxCount = 0;
 
         public Form1()
         {
             InitializeComponent();
+            threadSkor();
         }
 
         //Daireleri çizecek metod
         public void PictureDraw() 
         {
             Random rnd = new Random();
-            int num = rnd.Next(0, 1000);
+            int num = rnd.Next(0, 2000);
 
             //Kare şeklinde PictureBox çizdirme
             PictureBox newPic = new PictureBox();
@@ -54,11 +43,11 @@ namespace TopSektirmeSkorlu
             newPic.Region = rg;
 
             //Dairenin çizdireleceği aralıklar
-            int x = rand.Next(30, 700);
-            int y = rand.Next(30, 520);
+            int x = rand.Next(100, 700);
+            int y = rand.Next(100, 300);
             newPic.Location = new Point(x, y);
 
-            items.Add(newPic);
+            PicBoxList.Add(newPic);
             this.Controls.Add(newPic);
 
             //Renkleri rastgele belirlemek için
@@ -78,12 +67,13 @@ namespace TopSektirmeSkorlu
             {
                 newPic.BackColor = Color.Green;
             }
+
             picBoxCount++;
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        { 
-            PictureDraw();            
+        {
+            PictureDraw();
         }
 
         //Oyuna devam et
@@ -100,19 +90,37 @@ namespace TopSektirmeSkorlu
             Movement.Stop();
         }
 
-        //Verilen interval değere göre ekrana daire çizilmesi
+        //Oyun Skorunun güncellenmesi
+        int gamescore = 0;
+        private void threadSkor()
+        {
+            while(gamescore > 0)
+            {
+                //Gamescore değişimine göre textin değişmesi
+                if (gamescore == 1)
+                {
+                    skor.Text = (1 + Double.Parse(skor.Text)).ToString();
+                }
+                else if (gamescore == 10)
+                {
+                    skor.Text = (10 + Double.Parse(skor.Text)).ToString();
+                }
+                else if (gamescore == -20)
+                {
+                    skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
+                }
+
+                Thread.Sleep(100);
+            }  
+        }
+
+        //Verilen interval değere göre ekrana topların çizilmesi
         private void TimerEvent(object sender, EventArgs e)
         {
-            if (picBoxCount < 6)
+
+            if (picBoxCount < 6 && picBoxCount >0)
             {
                 PictureDraw();
-            }
-            else if (picBoxCount == 0)
-            {
-                MessageBox.Show("YOU HAVE WON!");
-                Spawn.Stop();
-                Movement.Stop();
-                Spawn.Enabled = false;
             }
             else if (picBoxCount == 10)
             {
@@ -121,26 +129,13 @@ namespace TopSektirmeSkorlu
                 Movement.Stop();
                 Spawn.Enabled = false;
             }
-
-        }
-
-        //Oyun Skorunun güncellenmesi
-        private void GuncelSkor(object sender, EventArgs e)
-        {
-            //Gamescore değişimine göre textin değişmesi
-            if (gamescore == 1)
+            else if (picBoxCount == 0)
             {
-                skor.Text = (1 + Double.Parse(skor.Text)).ToString();
+                MessageBox.Show("YOU HAVE WON!");
+                Spawn.Stop();
+                Movement.Stop();
+                Spawn.Enabled = false;
             }
-            else if (gamescore == 10)
-            {
-                skor.Text = (10 + Double.Parse(skor.Text)).ToString();
-            }
-            else if (gamescore == -20)
-            {
-                skor.Text = (-20 + Double.Parse(skor.Text)).ToString();
-            }
-
         }
 
         //Çubuğun sağa sola hareketi
@@ -197,10 +192,280 @@ namespace TopSektirmeSkorlu
             cubuk.Location = new Point(x, y);
         }
 
+        //Oyunu sıfırlama
+        private void reset_Click(object sender, EventArgs e)
+        {
+            Form1 NewForm = new Form1();
+            NewForm.Show();
+            this.Dispose(false);
+        }
+
+        //Backup tuşu TAMAMLANMADI
+        private void backup_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //Restore tuşu TAMAMLANMADI
+        private void restore_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //--------------------------------TOP HAREKETLERİ-------------------------------------------------------
+        //Topların hızları
+        int hizx1 = 2;
+        int hizy1 = 2;
+        int hizx2 = 2;
+        int hizy2 = 2;
+        int hizx3 = 2;
+        int hizy3 = 2;
+        int hizx4 = 2;
+        int hizy4 = 2;
+        int hizx5 = 2;
+        int hizy5 = 2;
+        int hizx6 = 2;
+        int hizy6 = 2;
+        int hizx7 = 2;
+        int hizy7 = 2;
+        int hizx8 = 2;
+        int hizy8 = 2;
+        int hizx9 = 2;
+        int hizy9 = 2;
+        int hizx10 = 2;
+        int hizy10 = 2;
+
         //Hareketi sağlamak için !TAMAMLANMADI!
         private void Movement_Tick(object sender, EventArgs e)
         {
+            if (picBoxCount > 0)
+            {
+                PictureBox firstPic = PicBoxList.ElementAt(0);
+                
+                firstPic.Top = firstPic.Top + hizy1;
+                firstPic.Left = firstPic.Left - hizx1;
+
+                if(firstPic.Bounds.IntersectsWith(sag.Bounds) || firstPic.Bounds.IntersectsWith(sol.Bounds))
+                {
+                    hizx1 *= -1;
+                }
+
+                if (firstPic.Bounds.IntersectsWith(sagUst.Bounds) || firstPic.Bounds.IntersectsWith(solUst.Bounds))
+                {
+                    hizy1 *= -1;
+                }
+
+                if (firstPic.Bounds.IntersectsWith(cubuk.Bounds))
+                {
+                    hizy1 *= -1;
+                }
+
+                if (firstPic.Bounds.IntersectsWith(CıkanTopUst.Bounds))
+                {
+                    gamescore = 10;
+                }
+            }
+
+            if (picBoxCount > 1)
+            {
+                PictureBox secondPic = PicBoxList.ElementAt(1);
+                secondPic.Top = secondPic.Top - hizy2;
+                secondPic.Left = secondPic.Left - hizx2;
+
+                if (secondPic.Bounds.IntersectsWith(sag.Bounds) || secondPic.Bounds.IntersectsWith(sol.Bounds))
+                {
+                    hizx2 *= -1;
+                }
+
+                if (secondPic.Bounds.IntersectsWith(sagUst.Bounds) || secondPic.Bounds.IntersectsWith(solUst.Bounds))
+                {
+                    hizy2 *= -1;
+                }
+
+                //Yukarıdaki boşluktan çıkması
+                if (secondPic.Bounds.IntersectsWith(cubuk.Bounds))
+                {
+                    
+                }
+            }
             
+            if (picBoxCount > 2)
+            {
+                PictureBox thirdPic = PicBoxList.ElementAt(2);
+                thirdPic.Top = thirdPic.Top - hizy3;
+                thirdPic.Left = thirdPic.Left + hizx3;
+
+                if (thirdPic.Bounds.IntersectsWith(sag.Bounds) || thirdPic.Bounds.IntersectsWith(sol.Bounds))
+                {
+                    hizx3 *= -1;
+                }
+
+                if (thirdPic.Bounds.IntersectsWith(sagUst.Bounds) || thirdPic.Bounds.IntersectsWith(solUst.Bounds))
+                {
+                    hizy3 *= -1;
+                }
+
+                if (thirdPic.Bounds.IntersectsWith(cubuk.Bounds))
+                {
+                    hizy3 *= -1;
+                }
+            }
+            
+            if (picBoxCount > 3)
+            {
+                PictureBox fourthPic = PicBoxList.ElementAt(3);
+                fourthPic.Top = fourthPic.Top + hizy4;
+                fourthPic.Left = fourthPic.Left - hizx4;
+
+                if (fourthPic.Bounds.IntersectsWith(sag.Bounds) || fourthPic.Bounds.IntersectsWith(sol.Bounds))
+                {
+                    hizx4 *= -1;
+                }
+
+                if (fourthPic.Bounds.IntersectsWith(sagUst.Bounds) || fourthPic.Bounds.IntersectsWith(solUst.Bounds))
+                {
+                    hizy4 *= -1;
+                }
+
+                if (fourthPic.Bounds.IntersectsWith(cubuk.Bounds))
+                {
+                    hizy4 *= -1;
+                }
+            }
+            
+            if (picBoxCount > 4)
+                {
+                PictureBox fifthPic = PicBoxList.ElementAt(4);
+                fifthPic.Top = fifthPic.Top + hizy5;
+                fifthPic.Left = fifthPic.Left + hizx5;
+
+                if (fifthPic.Bounds.IntersectsWith(sag.Bounds) || fifthPic.Bounds.IntersectsWith(sol.Bounds))
+                {
+                    hizx5 *= -1;
+                }
+
+                if (fifthPic.Bounds.IntersectsWith(sagUst.Bounds) || fifthPic.Bounds.IntersectsWith(solUst.Bounds))
+                {
+                    hizy5 *= -1;
+                }
+
+                if (fifthPic.Bounds.IntersectsWith(cubuk.Bounds))
+                {
+                    hizy5 *= -1;
+                }
+            }
+            
+            if (picBoxCount > 5)
+            {
+                PictureBox sixthPic = PicBoxList.ElementAt(5);
+                sixthPic.Left = sixthPic.Left + hizx6;
+                sixthPic.Top = sixthPic.Top - hizy6;
+
+                if (sixthPic.Bounds.IntersectsWith(sag.Bounds) || sixthPic.Bounds.IntersectsWith(sol.Bounds))
+                {
+                    hizx6 *= -1;
+                }
+
+                if (sixthPic.Bounds.IntersectsWith(sagUst.Bounds) || sixthPic.Bounds.IntersectsWith(solUst.Bounds))
+                {
+                    hizy6 *= -1;
+                }
+
+                if (sixthPic.Bounds.IntersectsWith(cubuk.Bounds))
+                {
+                    hizy6 *= -1;
+                }
+            }
+            
+            if (picBoxCount > 6)
+            {
+                PictureBox seventhPic = PicBoxList.ElementAt(6);
+                seventhPic.Left = seventhPic.Left - hizx7;
+                seventhPic.Top = seventhPic.Top + hizy7;
+
+                if (seventhPic.Bounds.IntersectsWith(sag.Bounds) || seventhPic.Bounds.IntersectsWith(sol.Bounds))
+                {
+                    hizx7 *= -1;
+                }
+
+                if (seventhPic.Bounds.IntersectsWith(sagUst.Bounds) || seventhPic.Bounds.IntersectsWith(solUst.Bounds))
+                {
+                    hizy7 *= -1;
+                }
+
+                if (seventhPic.Bounds.IntersectsWith(cubuk.Bounds))
+                {
+                    hizy7 *= -1;
+                }
+            }
+            
+            if (picBoxCount > 7)
+            {
+                PictureBox eigthPic = PicBoxList.ElementAt(7);
+                eigthPic.Left = eigthPic.Left - hizx8;
+                eigthPic.Top = eigthPic.Top - hizy8;
+
+                if (eigthPic.Bounds.IntersectsWith(sag.Bounds) || eigthPic.Bounds.IntersectsWith(sol.Bounds))
+                {
+                    hizx8 *= -1;
+                }
+
+                if (eigthPic.Bounds.IntersectsWith(sagUst.Bounds) || eigthPic.Bounds.IntersectsWith(solUst.Bounds))
+                {
+                    hizy8 *= -1;
+                }
+
+                if (eigthPic.Bounds.IntersectsWith(cubuk.Bounds))
+                {
+                    hizy8 *= -1;
+                }
+            }
+            
+            if (picBoxCount > 8)
+            {
+                PictureBox ninthPic = PicBoxList.ElementAt(8);
+                ninthPic.Left = ninthPic.Left + hizx9;
+                ninthPic.Top = ninthPic.Top + hizy9;
+
+                if (ninthPic.Bounds.IntersectsWith(sag.Bounds) || ninthPic.Bounds.IntersectsWith(sol.Bounds))
+                {
+                    hizx9 *= -1;
+                }
+
+                if (ninthPic.Bounds.IntersectsWith(sagUst.Bounds) || ninthPic.Bounds.IntersectsWith(solUst.Bounds))
+                {
+                    hizy9 *= -1;
+                }
+
+                if (ninthPic.Bounds.IntersectsWith(cubuk.Bounds))
+                {
+                    hizy9 *= -1;
+                }
+            }
+            
+            if (picBoxCount > 9)
+            {
+                PictureBox tenthPic = PicBoxList.ElementAt(9);
+                tenthPic.Left = tenthPic.Left + hizx10;
+                tenthPic.Top = tenthPic.Top - hizy10;
+
+                if (tenthPic.Bounds.IntersectsWith(sag.Bounds) || tenthPic.Bounds.IntersectsWith(sol.Bounds))
+                {
+                    hizx10 *= -1;
+                }
+
+                if (tenthPic.Bounds.IntersectsWith(sagUst.Bounds) || tenthPic.Bounds.IntersectsWith(solUst.Bounds))
+                {
+                    hizy10 *= -1;
+                }
+
+                if (tenthPic.Bounds.IntersectsWith(cubuk.Bounds))
+                {
+                    hizy10 *= -1;
+                }
+            }
+
         }
+
     }
 }

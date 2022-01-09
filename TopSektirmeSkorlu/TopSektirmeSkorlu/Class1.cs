@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace TopSektirmeSkorlu
 {
     class Class1
-    {   
+    {
+        
     }
 }
