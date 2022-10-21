@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -68,11 +68,9 @@ namespace TopSektirmeSkorlu
             int x = rand.Next(100, 600);
             int y = rand.Next(50, 300);
             newPic.Location = new Point(x, y);
-            //Topu PicBoxList listesine ekler
+
             PicBoxList.Add(newPic);
-            //class TopSektirmeSkorlu.Form1 e topu ekler
             this.Controls.Add(newPic);
-            //top sayısı artırılır
             picBoxCount++;
         }
 
@@ -99,8 +97,8 @@ namespace TopSektirmeSkorlu
         //Oyunu sıfırla
         private void reset_Click(object sender, EventArgs e)
         {
-            Form1 NewForm = new Form1();
-            NewForm.Show();
+            Form1 newForm = new Form1();
+            newForm.Show();
             this.Dispose(false);
         }
 
@@ -218,7 +216,7 @@ namespace TopSektirmeSkorlu
 
         }
 
-        //--------------------------------TOP HAREKETLERİ-------------------------------------------------------
+        //--------------------------------TOP HAREKETLERİ--------------------------------OPTİMAL DEĞİL-----------------------
         //Topların hızları
         int hizx1 = 2;
         int hizy1 = 2;
